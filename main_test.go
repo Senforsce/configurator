@@ -261,3 +261,87 @@ func TestOutputFileCreateError(t *testing.T) {
 	}()
 	main()
 }
+
+// Replaces '__NAME__' with the provided name parameter
+func TestReplaceNameParameter(t *testing.T) {
+	p := Params{
+		in:        "input string",
+		name:      "testName",
+		typeValue: "string",
+	}
+	expected := "input string"
+	result := MakeCustonFunc(p)
+	if result != expected {
+		t.Errorf("Expected %s, but got %s", expected, result)
+	}
+}
+
+// Replaces '__NAME_PASCAL__' with the provided name parameter in PascalCase
+func TestReplaceNamePascalCase(t *testing.T) {
+	p := Params{
+		in:        "input string",
+		name:      "testName",
+		typeValue: "string",
+	}
+	expected := "input string"
+	result := MakeCustonFunc(p)
+	if result != expected {
+		t.Errorf("Expected %s, but got %s", expected, result)
+	}
+}
+
+// Replaces '__TYPE__' with the provided typeValue parameter if it exists
+func TestReplaceTypeValue(t *testing.T) {
+	p := Params{
+		in:        "input string",
+		name:      "testName",
+		typeValue: "string",
+	}
+	expected := "input string"
+	result := MakeCustonFunc(p)
+	if result != expected {
+		t.Errorf("Expected %s, but got %s", expected, result)
+	}
+}
+
+// Returns an empty string if the input string is empty
+func TestEmptyInputString(t *testing.T) {
+	p := Params{
+		in:        "",
+		name:      "testName",
+		typeValue: "string",
+	}
+	expected := ""
+	result := MakeCustonFunc(p)
+	if result != expected {
+		t.Errorf("Expected %s, but got %s", expected, result)
+	}
+}
+
+// Returns the input string if the name parameter is empty
+func TestEmptyNameParameter(t *testing.T) {
+	p := Params{
+		in:        "input string",
+		name:      "",
+		typeValue: "string",
+	}
+	expected := "input string"
+	result := MakeCustonFunc(p)
+	if result != expected {
+		t.Errorf("Expected %s, but got %s", expected, result)
+	}
+}
+
+// Returns the input string if the '__NAME__' pattern is not found
+func TestPatternNotFound(t *testing.T) {
+	p := Params{
+		in:        "input string",
+		name:      "testName",
+		typeValue: "string",
+	}
+	expected := "input string"
+	result := MakeCustonFunc(p)
+	if result != expected {
+		t.Errorf("Expected %s, but got %s", expected, result)
+	}
+}
